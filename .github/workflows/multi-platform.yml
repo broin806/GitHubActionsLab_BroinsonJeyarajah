@@ -1,1 +1,55 @@
+name: Workflow 2 - Multi Platform
 
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  ubuntu-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Show OS info (Ubuntu)
+        run: |
+          echo "Running on Ubuntu..."
+          uname -a
+
+      - name: Create and display file (Ubuntu)
+        run: |
+          echo "Hello from Ubuntu" > os.txt
+          cat os.txt
+
+  windows-job:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Show OS info (Windows)
+        run: |
+          echo "Running on Windows..."
+          systeminfo
+
+      - name: Create and display file (Windows)
+        shell: pwsh
+        run: |
+          "Hello from Windows" | Out-File os.txt
+          Get-Content os.txt
+
+  macos-job:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Show OS info (macOS)
+        run: |
+          echo "Running on macOS..."
+          uname -a
+
+      - name: Create and display file (macOS)
+        run: |
+          echo "Hello from macOS" > os.txt
+          cat os.txt
